@@ -12,11 +12,6 @@
 
 @implementation TableViewCell
 
-- (void)awakeFromNib {
-    [super awakeFromNib];
-    // Initialization code
-
-}
 
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
@@ -27,7 +22,6 @@
  
 
 -(void)createCell{
-    
     _contentLabel = [[UILabel alloc]init];
      _contentLabel.numberOfLines = 0;
     _contentLabel.font = [UIFont systemFontOfSize:13];
@@ -39,8 +33,6 @@
         make.top.mas_equalTo(self.contentView).offset(10);
         make.bottom.mas_equalTo(self.contentView).offset(-10);
     }];
-    
-    
 }
 
 
