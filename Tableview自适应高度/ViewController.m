@@ -2,8 +2,8 @@
 //  ViewController.m
 //  Tableview自适应高度
 //
-//  Created by Franta on 17/3/8.
-//  Copyright © 2017年 Franta. All rights reserved.
+//  Created by XieHenry on 17/3/8.
+//  Copyright © 2017年 XieHenry. All rights reserved.
 //
 
 #import "ViewController.h"
@@ -28,19 +28,21 @@
     
     self.tableView.estimatedRowHeight = 100;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+
     [self.view addSubview:self.tableView];
 
     
     
-    self.contentAry = @[@"测试01",@"测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试02",@"测试测试测试测试测试测试测试测试测03",@"测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试04"];
+    self.contentAry = @[@"设置固定高度100,其余的设置为自适应高度--00",@"测试--01",@"测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试--02",@"测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试--03"];
     [self.tableView reloadData];
     
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    
     return 1;
 }
+
 /*
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSString *cellStr = self.contentAry[indexPath.row];
@@ -51,14 +53,25 @@
     return cellSize.height+30;
 }
 */
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
+    //如果有必须的固定高度，可以设置固定的，没有固定的，可以设置自适应高度
+    if (indexPath.row == 0) {
+        return 100;
+    } else {
+        return UITableViewAutomaticDimension;
+    }
+}
+
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.contentAry.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *ID = @"cell";
     
+    static NSString *ID = @"cell";
     //利用系统自带cell类型
     TableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
     if (cell == nil) {
